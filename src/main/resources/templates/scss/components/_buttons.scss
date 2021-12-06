@@ -1,0 +1,113 @@
+@use "../custom" as *;
+@use "../components/mixins" as *;
+
+.btn-rounded {
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+  position: relative;
+  padding: 0.9375rem 3.2rem 0.9375rem 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  border: 0.1rem solid rgba($white, 0.6);
+  text-align: center;
+  background-color: $white;
+
+  span {
+    position: absolute;
+    background-color: $green;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+
+    i {
+      color: white;
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  // span{
+  //     background-color: rgba($black,0.6);
+  // }
+}
+
+#inst {
+  margin-right: 0px;
+
+  border: 0.1rem solid rgba($black, 0.6);
+
+  span {
+    background-color: white !important;
+    text-decoration: none !important;
+
+    i {
+      color: black !important;
+    }
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+
+.beer {
+  // border-radius: 50% !important;
+
+  // border-image: linear-gradient(to left,red,orange) !important;
+  // border-image-slice: 1 !important;
+  border: 3px solid red;
+}
+.dropdown-menu ul {
+  padding: 6px;
+
+  i {
+    margin: 5px;
+    font-size: 1.5rem;
+  }
+}
+
+.supp_log {
+  margin: 10px;
+  font-size: 1.5rem;
+}
+
+.dropdown-menu li {
+  font-family: "Poppins", sans-serif;
+  font-weight: 20;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 2px;
+  color: blue;
+  list-style-type: none;
+}
+
+.REG {
+  background-color: yellow;
+  margin: 10px;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.bookingform-box {
+  max-width: 35px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+  margin: 10% auto 0;
+}
+
+.form-check-label {
+  font-family: "Poppins", sans-serif;
+  font-weight: 20;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 2px;
+  list-style-type: none;
+}

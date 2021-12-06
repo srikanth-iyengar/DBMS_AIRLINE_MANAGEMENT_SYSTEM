@@ -1,0 +1,49 @@
+@use "../custom" as *;
+
+.services {
+  position: relative;
+  padding: 1rem 0;
+
+  &__content {
+    padding: 1rem;
+    margin-top: 0;
+
+    p {
+      font-size: 0.8rem;
+      @include media-breakpoint-up(lg) {
+        font-size: 1rem;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 5rem;
+    }
+
+    .icon {
+      font-size: 1.5rem;
+      color: $primary;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  &__pic {
+    max-width: 100%;
+    // margin: 0 7.5rem;
+
+    img {
+      max-height: 15rem;
+      @include media-breakpoint-up(lg) {
+        margin-top: 4rem;
+        max-height: 25rem;
+      }
+    }
+  }
+}
+
+.board {
+  //   border: 1px solid black;
+  box-shadow: 500px 100px;
+}
