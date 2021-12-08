@@ -1,0 +1,61 @@
+@use "../custom" as *;
+@use "../components/mixins" as *;
+
+.footer2 {
+  padding-top: 40px;
+}
+
+.footer {
+  padding-top: 2rem;
+  background-color: $footer;
+  font-family: "Poppins";
+}
+
+.social-med {
+  padding: 0px;
+}
+
+.contact-box--icon {
+  width: 4rem;
+  stroke: $primary;
+}
+.contact-box--subtitle {
+  color: $gray-300 !important;
+}
+
+.cbit {
+  color: white;
+  text-decoration: none !important;
+  font-size: 1.2rem !important;
+}
+
+.cbs {
+  color: $gray-300 !important;
+}
+
+.contact-box {
+  position: relative !important;
+
+  &__icon {
+    width: 4rem;
+    stroke: $primary;
+  }
+
+  &__info {
+    padding: 0.4rem !important;
+  }
+
+  &--title {
+    color: white;
+    text-decoration: none;
+    font-size: 1.4rem;
+  }
+
+  &--subtitle {
+    color: $gray-300;
+  }
+}
+
+.cbs {
+  color: $gray-300 !important;
+}

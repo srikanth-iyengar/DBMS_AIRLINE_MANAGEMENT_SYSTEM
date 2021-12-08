@@ -9,28 +9,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FlightService {
-	
+
 	@Autowired
 	private FlightRepository flightRepository;
-	
+
 	public String registerFlight(RegisterFlight flight) {
-		flightRepository.save(
-		new Flight(
-				flight.getArrival(),
-				flight.getDeparture(),
-				flight.getCapacity(),
-				flight.getSource(),
-				flight.getDestination()
-				)
-		);
+		flightRepository.save(new Flight(flight.getArrival(), flight.getDeparture(), flight.getCapacity(),
+				flight.getSource(), flight.getDestination()));
 		return "flight registered successfully";
 	}
-	
-	public Iterable<Flight> FindFlight(String source, String Destination) {
-		return flightRepository.findBySourceAndDestination(source, Destination)
-				.stream().filter(
-				t -> t.getDeparture().isAfter(LocalDateTime.now())).
-				collect(Collectors.toList());
-		
+
+	public Iterable<Flight> FindFlight(String source, String destination) {
+		return flightRepository.findAll().stream().filter(t -> t.getDeparture().isAfter(LocalDateTime.now())).collect(Collectors.toList());
+
 	}
 }
