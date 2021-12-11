@@ -31,6 +31,10 @@ public class CustomerController {
 		return customerService.register(request);
 	}
 	
+	@GetMapping(path = "/register")
+	public String Register() {
+		return "RegisterUser";
+	}
 	@GetMapping(path = "/accessDenied")
 	public String accessDenied() {
 		return "accessdenied";
