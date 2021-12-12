@@ -55,6 +55,6 @@ public class BookingService {
 			passengerRepository.save(temppass);
 		}
 
-		return "Transaction Successful " + generatedTransactionid;
+		return "true " + generatedTransactionid;
 	}
 }

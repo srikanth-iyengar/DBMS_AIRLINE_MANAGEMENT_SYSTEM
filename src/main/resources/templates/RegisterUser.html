@@ -2,80 +2,90 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+    <base href="/">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <!-- <link rel="stylesheet" href="assets/vendors/css/glightbox.min.css"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <title>Register User</title>
+    <title>D2 Airlines</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/vendors/css/glightbox.min.css">
+    <link href="/https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="/https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 
 <div id="result"></div>
 
 <body>
-    <form id="registerForm" th:action="@{user/register/}" style="margin: 15%" class="row g-3 needs-validation" novalidate>
-        <div class="form-group" >
+        <section id="home" class="intro-section">
+      <div class="container mt-4">
+        <h1 class="text-center ur pb display-4">
+            User<span
+            class="text-white"
+            >Registration</span
+          >
+        </h1>
+        </div>  
+          <div class="big-banner col-md-12">
+        <div class="booking-form-box userbox align-items-center text-white" id="form">
+           <div class="input-grp mt-3">
             <label>First Name</label>
-            <input type="text" name="firstName" placeholder="First Name" id="firstName" required>
-            <div class="valid-feedback">
-                Looks Good!
+            <input type="text" class="form-control mt-2 mb-2" placeholder="John" id="FirstName">
             </div>
-        </div>
-        <div class="form-group" >
-            <labe>Last Name</label>
-                <input type="text" name="lastName" placeholder="Last Name" id="lastName" required>
-                <div class="valid-feedback">
-                    Looks Good!
-                </div>
-        </div>
-        <div class="form-group" >
-            <label>Email</label>
-            <input type="email" name="email" placeholder="Email" id="email" required>
-            <div class="valid-feedback">
-                Looks Good!
+          
+            <div class="input-grp">
+            <label>Last Name</label>
+            <input type="text" class="form-control mt-2 mb-2" placeholder="Doe" id="LastName">
             </div>
-        </div>
-        <div class="form-group" >
+                      
+            <div class="input-grp">
+            <label>Email ID</label>
+            <input type="email" class="form-control mt-2 mb-2" placeholder="name@example.com" id="Email">
+            </div>
+
+           <div class="input-grp">
             <label>Password</label>
-            <input type="password" name="password" id="password" required>
-            <div class="valid-feedback">
-                Looks Good!
+            <input type="password" class="form-control mt-2 mb-2" id="password">
             </div>
-        </div>
-        <div class="form-group" name="gender" id="gender" >
-            <select class="form-control">
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select>
-            <div class="invalid-feedback">
-                Looks Good!
+
+    
+       
+    
+            
+            <div class="input-grp agen">
+                <span class="gender">
+                <label>Gender: </label>
+                       <select class="custom-select mt-2 mb-2">
+              <option value="1">M</option>
+              <option value="2">F</option>
+              </select>
+                </span>
+                <span class="age">
+            <label>Age: </label>
+            <input type="text" class="form-control agein" id="Age">
+                </span>
             </div>
-        </div>
-        <div class="form-group" >
-            <label>Age</label>
-            <input type="number" name="age" placeholder="Age" id="age" min="18" required>
-            <div class="valid-feedback">
-                Looks Good!
+            
+            <div class="input-grp phone">
+            <label>Phone Number</label>
+            <input type="tel" class="form-control mt-2 mb-2" placeholder="0123456789" id="Phone">
             </div>
+
+              <div class="input-grp Contact mt-2">
+              <button type="button" class="btn mb-2 btn-primary addContact" id="addContact">
+                Register
+              </button>
         </div>
-        <div class="form-group" >
-            <label>Mobile Number</label>
-            <input type="text" name="phoneNo" placeholder="Mobile Number" id="phoneNo" required>
-            <div class="valid-feedback">
-                Looks Good!
-            </div>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary">Register</button>
-    </form>
+        </div>
+      </div>
+    </section>
+
+   
 
     <script>
         $("#registerForm").submit(function (event) {
@@ -107,6 +117,8 @@
             });
         });
     </script>
+
+
 
 </body>
 

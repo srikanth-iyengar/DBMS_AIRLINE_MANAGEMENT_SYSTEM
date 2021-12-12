@@ -1,20 +1,27 @@
 package com.example.demo.User;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.StringTokenizer;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.Booking.BookingService;
 import com.example.demo.Flight.FlightService;
+import com.example.demo.User.Passenger.BookingRequest;
+import com.example.demo.User.Passenger.Passenger;
 
 @Controller
 @RequestMapping(path = "/user")
@@ -25,6 +32,9 @@ public class CustomerController {
 
 	@Autowired
 	FlightService flightService;
+	
+	@Autowired
+	BookingService bookingService;
 
 	@PostMapping(path = "/register")
 	public @ResponseBody String Register(@RequestBody RegistrationRequest request) {
@@ -56,10 +66,40 @@ public class CustomerController {
 	}
 
 	
-	@GetMapping(value = "/book")
-	@ResponseBody
-	public String BookTicket() {
-		return UUID.randomUUID().toString();
+	@GetMapping(value = "/book/{id}")
+	public String bookFlight(Model M,@PathVariable String id) {
+		return "FlightBooking";
+	}
+	
+	@PostMapping(value="book/{id}")
+	public String confirmBooking(@PathVariable String id,@RequestBody List<Passenger> a, HttpServletRequest auth, Model m) {
+		StringBuilder flight_id = new StringBuilder(id);
+		a.remove(0);
+		Long uid = Long.parseLong(flight_id.substring(8));
+		Principal UserName = auth.getUserPrincipal();
+		String userEmail = UserName.getName();
+		Long customer_id = customerService.userId(userEmail);
+		BookingRequest request = new BookingRequest(uid, customer_id, a);
+		StringTokenizer st = new StringTokenizer(bookingService.bookTicket(request));
+		Boolean isSuccess = Boolean.parseBoolean(st.nextToken());
+		if(isSuccess) {
+			return "success";		
+		}
+		else {
+			return "faile";
+		}
+	}
+	
+	
+	@GetMapping(value = "/dashboard")
+	public String dashboard(Model m, HttpServletRequest auth) {
+		Principal UserName = auth.getUserPrincipal();
+		String userEmail = UserName.getName();
+		
+		User cur = customerService.currentUser(userEmail);
+		
+		m.addAttribute("user", cur);
+		return "dashboarduser";
 	}
 	
 }

@@ -16,6 +16,15 @@ public class CustomerService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return customerRepository.findByEmail(username);
 	}
+	
+	public Long userId(String email) {
+		User user_id = customerRepository.findByEmail(email);
+		return user_id.getId();
+	}
+	
+	public User currentUser(String email) {
+		return customerRepository.findByEmail(email);
+	}
 
 	public String register(RegistrationRequest customer) {
 		User cust = customerRepository.findByEmail(customer.getEmail());

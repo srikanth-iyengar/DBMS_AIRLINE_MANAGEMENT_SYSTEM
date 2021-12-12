@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.User.Passenger.BookingRequest;
 
 @Controller
-@RequestMapping("/book")
+@RequestMapping("/srikanth")
 public class BookingController {
 	
 	@Autowired

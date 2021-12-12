@@ -19,34 +19,56 @@
 </head>
 
 <body>
-    <button id="addForm" class="btn btn-danger">Add</button>
     <div id="form">
-
+        <div class="row" id="a1">
+            <div class="col-5">
+                <input type="text" name="firstName" id="firstName1" class="form-control " placeholder="First Name">
+            </div>
+            <div class="col-5">
+                <input type="text" name="lastName" id="lastName1" class="form-control" placeholder="Last Name">
+            </div>
+            <input type="number" name="age" id="age1" class="form-control" placeholder="Age" min="1">
+            <div class="col-5">
+                <select class="form-select" id="gender1">
+                    <option value="M">Male</option>
+                    <option value="F"> Femal</option>
+                </select>
+            </div>
+            <div>
+                <input type="text" name="aadharId" id="aadharId1" class="form-control" placeholder="12 digit AadharId">
+            </div>
+        </div>
+        <button type="button" id="del1" class="btn btn-primary">
+            DELETE</button>
     </div>
+    <button type="button" class="btn btn-success" id="bookbutton">Book</button>
+    <button id="addForm" class="btn btn-danger" type="button">Add</button>
 </body>
 <script>
     $(document).ready(() => {
-        var count = 1
+        var count = 2
         $("#addForm").click(function () {
             $("#form").append(`
-            <form id=a${count}>
-                <div class="row">
+                <div class="row" id="a${count}">
                     <div class="col-5">
-                        <input type="text" name="firstName" id="firstName" class="form-control " placeholder="First Name" >
+                        <input type="text" name="firstName" id="firstName${count}" class="form-control " placeholder="First Name" >
                     </div>
                     <div class="col-5">
-                        <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name">
+                        <input type="text" name="lastName" id="lastName${count}" class="form-control" placeholder="Last Name">
                     </div >
-                        <input type="number" name="age" id="age" class="form-control" placeholder="Age">
+                        <input type="number" name="age" id="age${count}" class="form-control" placeholder="Age" min="1">
                     <div class="col-5">
-                        <select class="form-select">
-                            <option val="M">Male</option> 
-                            <option val="F"> Femal</option>    
+                        <select class="form-select" id="gender${count}">
+                            <option value="M">Male</option> 
+                            <option value="F"> Female</option>    
                         </select>
                     </div>
-                </div>
-                <button type="button" id=del${count} class="btn btn-primary" onclick="deleteBox($(this).attr('id'));"> DELETE</button>
-            </form>`)
+                    <div>
+                        <input type="text" name="aadharId" id="aadharId${count}" class="form-control" placeholder="12 digit AadharId">
+                    </div>
+                    <button type="button" id="del${count}" class="btn btn-primary" onclick="deleteBox($(this).attr('id'));"> DELETE</button>
+                </div>`
+            )
             count++
         });
         deleteBox = (id) => {
@@ -57,6 +79,37 @@
             }
             $("#" + form_id).remove();
         };
+        $("#bookbutton").click(function (event) {
+            event.preventDefault();
+            alert("Submitting the form");
+            var passengers = [{
+
+            }];
+            for (var i = 1; i <= count; i++) {
+                if ($(`#a${i}`).length) {
+                    var passenger = {
+
+                    };
+                    passenger["firstName"] = $(`#firstName${i}`).val();
+                    passenger["lastName"] = $(`#lastName${i}`).val();
+                    passenger["age"] = $(`#age${i}`).val();
+                    passenger["gender"] = $(`#gender${i}`).find(":selected").val();
+                    passenger["aadhar"] = $(`#aadharId${i}`).val();
+                    passengers.push(passenger);
+                }
+            }
+            console.log(passengers);
+            var pathname = window.location.pathname;
+            $.ajax({
+                method: "post",
+                url: pathname,
+                data: JSON.stringify(passengers),
+                datatype: 'json',
+                contentType: "application/json"
+            }, (data, status) => {
+                alert(`${data} - ${status}`)
+            });
+        });
     });
 </script>
 

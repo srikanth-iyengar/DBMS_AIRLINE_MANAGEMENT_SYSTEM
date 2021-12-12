@@ -29,7 +29,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/user/register").permitAll()
-		.and().authorizeRequests().antMatchers("/user/book").hasAnyAuthority("USER", "ADMIN")
+		.and().authorizeRequests().antMatchers("/user/book/**").hasAnyAuthority("USER", "ADMIN")
 		.and().formLogin().permitAll()
 		.and().logout().clearAuthentication(true).logoutSuccessUrl("/").deleteCookies("JSESSIONID").invalidateHttpSession(true)
 		.and().csrf().disable();
