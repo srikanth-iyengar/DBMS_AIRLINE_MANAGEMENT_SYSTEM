@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +21,7 @@ public class EmployeeService implements UserDetailsService {
 	}
 
 	public String registerAdmin(RegistrationAdmin admin) {
-		SCryptPasswordEncoder encoder = new SCryptPasswordEncoder();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String password = encoder.encode(admin.getPassword());
 		System.out.println(admin.getSalary());
 		employeeRepository.save(

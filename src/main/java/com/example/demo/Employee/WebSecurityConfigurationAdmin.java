@@ -23,8 +23,8 @@ public class WebSecurityConfigurationAdmin extends WebSecurityConfigurerAdapter{
 	private final EmployeeService employeeService;
 	
 	@Bean
-	public SCryptPasswordEncoder getsCryptPasswordEncoder() {
-		return new SCryptPasswordEncoder();
+	public BCryptPasswordEncoder getsCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 	
 	@Override

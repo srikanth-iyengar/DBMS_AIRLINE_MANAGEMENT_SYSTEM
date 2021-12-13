@@ -26,4 +26,9 @@ public class EmployeeController {
 	public String adminPage() {
 		return "<h1>AdminPage</h1>";
 	}
+	
+	@GetMapping("/login")
+	public String adminlogin() {
+		return "adminlogin";
+	}
 }
