@@ -54,10 +54,7 @@
           </div>
           <div>
             <button class="REG" id = "registerpage">
-              REGISTER
-            </button>
-            <button class="REG" id = "loginpage">
-              LOGIN
+                <span th:text="${user.email}"></span>
             </button>
           </div>
         </div>
@@ -487,12 +484,8 @@
     <script>
       $(document).ready(() => {
         $("#registerpage").click(() => {
-          var url = "user/register";
+          var url = "user/dashboard";
           $(location).attr('href',url);
-        });
-        $("#loginpage").click(() => {
-          var url = "user/login";
-          $(location).attr('href', url);
         });
       });
     </script>

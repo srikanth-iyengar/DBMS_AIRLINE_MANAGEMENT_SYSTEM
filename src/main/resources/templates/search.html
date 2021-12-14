@@ -70,7 +70,6 @@
 	<table class="table table-dark table-striped table-hover">
 		<thead>
 			<tr>
-				<th scope="col">#</th>
 				<th scope="col">Source</th>
 				<th scope="col">Destination</th>
 				<th scope="col">Departure</th>
@@ -79,7 +78,6 @@
 		</thead>
 		<tbody>
 			<tr th:each="flight : ${list}" style="cursor: pointer" th:onClick="'javascript:rowClicked(\'' + ${flight.flightId} + '\');'">
-				<td th:text="${flight.flightId}" />
 				<td th:text="${flight.source}" />
 				<td th:text="${flight.destination}" />
 				<td th:text="${flight.departure}" />

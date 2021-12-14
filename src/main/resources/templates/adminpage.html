@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin</title>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/fontawesome.css">
+        <link rel="stylesheet" href="assets/vendors/css/glightbox.min.css">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+            crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet">
+        
+        </head>
+</head>
+<body>
+    <table class="table table-dark table-striped table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Query Id</th>
+				<th scope="col">Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="query : ${list}" style="cursor: pointer" th:onClick="'javascript:rowClicked(\'' + ${query.queryId} + '\');'">
+				<td th:text="${query.queryId}" />
+                <td th:text="${query.description}" />
+			</tr>
+		</tbody>
+	</table>
+    <script>
+		function rowClicked(value) {
+			location.href="http://localhost:8080/admin/home/queryId"+value;
+		}
+	</script>
+</body>
+</html>

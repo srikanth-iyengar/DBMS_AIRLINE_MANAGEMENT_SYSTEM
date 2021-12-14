@@ -1,9 +1,9 @@
 package com.example.demo.User;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.Booking.Booking;
 import com.example.demo.Booking.BookingService;
 import com.example.demo.Flight.FlightService;
 import com.example.demo.User.Passenger.BookingRequest;
@@ -72,6 +73,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping(value="book/{id}")
+	@ResponseBody
 	public String confirmBooking(@PathVariable String id,@RequestBody List<Passenger> a, HttpServletRequest auth, Model m) {
 		StringBuilder flight_id = new StringBuilder(id);
 		a.remove(0);
@@ -81,13 +83,7 @@ public class CustomerController {
 		Long customer_id = customerService.userId(userEmail);
 		BookingRequest request = new BookingRequest(uid, customer_id, a);
 		StringTokenizer st = new StringTokenizer(bookingService.bookTicket(request));
-		Boolean isSuccess = Boolean.parseBoolean(st.nextToken());
-		if(isSuccess) {
-			return "success";		
-		}
-		else {
-			return "faile";
-		}
+		return bookingService.bookTicket(request);
 	}
 	
 	
@@ -97,9 +93,23 @@ public class CustomerController {
 		String userEmail = UserName.getName();
 		
 		User cur = customerService.currentUser(userEmail);
-		
+		List<Booking>bookings = bookingService.bookingRepo.findAll();
+		List<Booking> thisuser = new ArrayList<>();
+		for(Booking b : bookings) {
+			if(b.getUser().getUsername().equals(cur.getEmail()))
+			{
+				thisuser.add(b);
+			}
+		}
 		m.addAttribute("user", cur);
+		m.addAttribute("list", thisuser);
 		return "dashboarduser";
 	}
 	
+	
+	@GetMapping(value = "/success/{token}")
+	public String sucess(@PathVariable String token, Model m) {
+		m.addAttribute("token", token);
+		return "success";
+	}
 }

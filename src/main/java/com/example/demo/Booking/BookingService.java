@@ -42,7 +42,7 @@ public class BookingService {
 		book.setPrice(1445.00);
 		book.setDate(LocalDateTime.now());
 		bookingRepo.save(book);
-
+		System.out.println(request.getUserid());
 		for (Passenger pass : request.getPassengers()) {
 			Passenger temppass = new Passenger();
 			temppass.setAadhar(pass.getAadhar());
@@ -55,6 +55,6 @@ public class BookingService {
 			passengerRepository.save(temppass);
 		}
 
-		return "true " + generatedTransactionid;
+		return generatedTransactionid;
 	}
 }

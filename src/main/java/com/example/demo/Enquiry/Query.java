@@ -11,6 +11,12 @@ import javax.persistence.ManyToOne;
 import com.example.demo.Employee.Employee;
 import com.example.demo.User.User;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
 @Entity
 public class Query {
 	

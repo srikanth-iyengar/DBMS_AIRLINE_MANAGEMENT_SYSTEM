@@ -2,7 +2,6 @@ package com.example.demo.User;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,6 +29,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/user/register").permitAll()
 		.and().authorizeRequests().antMatchers("/user/book/**").hasAnyAuthority("USER", "ADMIN")
+		.and().authorizeRequests().antMatchers("/admin/home").hasAnyAuthority("ADMIN")	
 		.and().formLogin().permitAll()
 		.and().logout().clearAuthentication(true).logoutSuccessUrl("/").deleteCookies("JSESSIONID").invalidateHttpSession(true)
 		.and().csrf().disable();

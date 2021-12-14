@@ -41,12 +41,17 @@
         <button type="button" id="del1" class="btn btn-primary">
             DELETE</button>
     </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">₹</span>
+        <input type="text" disabled value="100" id = "amount">
+    </div>
     <button type="button" class="btn btn-success" id="bookbutton">Book</button>
     <button id="addForm" class="btn btn-danger" type="button">Add</button>
 </body>
 <script>
     $(document).ready(() => {
         var count = 2
+        var active = 1;
         $("#addForm").click(function () {
             $("#form").append(`
                 <div class="row" id="a${count}">
@@ -69,6 +74,8 @@
                     <button type="button" id="del${count}" class="btn btn-primary" onclick="deleteBox($(this).attr('id'));"> DELETE</button>
                 </div>`
             )
+            active++;
+            $("#amount").val(active*100)
             count++
         });
         deleteBox = (id) => {
@@ -77,6 +84,8 @@
             for (var i = 3; i < id_len; i++) {
                 form_id += id[i];
             }
+            active--;
+            $("#amount").val(active*100)
             $("#" + form_id).remove();
         };
         $("#bookbutton").click(function (event) {
@@ -99,13 +108,20 @@
                 }
             }
             console.log(passengers);
+            
             var pathname = window.location.pathname;
+            var result = null;
             $.ajax({
                 method: "post",
                 url: pathname,
                 data: JSON.stringify(passengers),
                 datatype: 'json',
-                contentType: "application/json"
+                contentType: "application/json",
+                success: (data) => {
+                    result = data;        
+                    var url = "http://localhost:8080/user/success/" + result;
+                    $(location).attr('href',url);
+                }
             }, (data, status) => {
                 alert(`${data} - ${status}`)
             });

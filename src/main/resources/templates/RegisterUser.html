@@ -56,7 +56,7 @@
         <div class="input-grp agen">
           <span class="gender">
             <label>Gender: </label>
-            <select class="custom-select mt-2 mb-2">
+            <select class="custom-select mt-2 mb-2" id="gender">
               <option value="M">M</option>
               <option value="F">F</option>
             </select>
@@ -88,15 +88,21 @@
   <script>
     $("#addContact").click(function (event) {
       event.preventDefault();
-      // alert("ge");
-      var fName = $("#firstName").val();
-      var lName = $("#lastName").val();
+      var fName = $("#FirstName").val();
+      var lName = $("#LastName").val();
       var password = $("#password").val();
-      var email = $("#email").val();
+      var email = $("#Email").val();
       var gender = $("#gender").find(":selected").val();
-      var phoneNo = $("#phoneNo").val();
+      var phoneNo = $("#Phone").val();
       var url = "/user/register";
-
+      console.log(JSON.stringify({
+          firstName: fName,
+          lastName: lName,
+          password: password,
+          email: email,
+          phoneNo: phoneNo,
+          gender: gender
+        }));
       $.ajax({
         method: "post",
         url: "/user/register",

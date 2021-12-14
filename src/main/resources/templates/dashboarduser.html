@@ -27,8 +27,23 @@
         <h1 th:text="${user.lastName}"></h1><br>
         <label>Email</label>
         <h1 th:text="${user.email}"></h1>
-        <table>
-
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Booking Date</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Booking Id</th>
+                    <th scope="col">Payment Mode</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="booking : ${list}" style="cursor: pointer">
+                    <td th:text="${booking.date}" />
+                    <td th:text="${booking.price}" />
+                    <td th:text="${booking.BookingId}" />
+                    <td th:text="${booking.paymentMode}" />
+                </tr>
+            </tbody>
         </table>
     </div>
 </body>
