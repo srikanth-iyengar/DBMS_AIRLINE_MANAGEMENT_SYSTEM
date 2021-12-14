@@ -22,7 +22,8 @@
         
         </head>
 </head>
-<body>
+<body style="background-color: blueviolet;">
+    
     <table class="table table-dark table-striped table-hover">
 		<thead>
 			<tr>
@@ -37,10 +38,37 @@
 			</tr>
 		</tbody>
 	</table>
+    <table class="table table-dark table-striped table-hover">
+		<thead>
+			<tr>
+				<th scope="col">User Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">User</th>
+			</tr>
+		</thead>
+		<tbody>
+            <!-- style="cursor: pointer" th:onClick="'javascript:unlock(\'' + ${user.email} + '\');'" -->
+			<tr th:each="user : ${lock}" style="cursor: pointer;" th:onClick="'javascript:unlock(\'' + ${user.id} + '\');'">
+				<td th:text="${user.id}" />
+                <td th:text="${user.firstName}" />
+                <td th:text="${user.lastName}" />
+                <td th:text="${user.email}" />
+			</tr>
+		</tbody>
+	</table>
     <script>
 		function rowClicked(value) {
 			location.href="http://localhost:8080/admin/home/queryId"+value;
 		}
+
+        function unlock(value) {
+			location.href="http://localhost:8080/admin/home/unlock/id"+value;
+		}
+
+        $("#home").click(() => {
+            location.href="http://localhost:8080/admin/home";
+        });
 	</script>
 </body>
 </html>

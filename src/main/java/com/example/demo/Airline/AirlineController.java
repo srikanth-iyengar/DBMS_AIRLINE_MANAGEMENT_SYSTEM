@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.Employee.Employee;
+import com.example.demo.Employee.EmployeeRepository;
 import com.example.demo.Flight.Flight;
 import com.example.demo.Flight.FlightService;
 import com.example.demo.User.CustomerService;
@@ -25,6 +27,9 @@ public class AirlineController {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	EmployeeRepository employeeRepository;
 
 	@GetMapping("/")
 	public String home(Model m, HttpServletRequest auth) {
@@ -34,7 +39,12 @@ public class AirlineController {
 		}
 		String username = p.getName();
 		User u = customerService.currentUser(username);
-		m.addAttribute("user", u);
+		if(u == null) {
+			Employee e = employeeRepository.findByUserName(username);
+			m.addAttribute("user", e.getUsername());
+			return "loggedinuser";
+		}
+		m.addAttribute("user", u.getUsername());
 		return "loggedinuser";
 	}
 	

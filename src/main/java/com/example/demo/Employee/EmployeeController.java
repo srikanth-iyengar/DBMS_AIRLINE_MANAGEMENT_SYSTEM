@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.Enquiry.Query;
 import com.example.demo.Enquiry.QueryRepository;
+import com.example.demo.User.CustomerRepository;
+import com.example.demo.User.CustomerService;
+import com.example.demo.User.User;
 
 @Controller
 @RequestMapping("/admin")
@@ -28,6 +32,12 @@ public class EmployeeController {
 	
 	@Autowired
 	public QueryRepository queryRepository;
+	
+	@Autowired
+	public CustomerService customerService;
+	
+	@Autowired
+	public CustomerRepository customerRepository;
 	@PostMapping
 	@ResponseBody
 	public String registerAdmin(@RequestBody RegistrationAdmin admin) {
@@ -48,6 +58,16 @@ public class EmployeeController {
 				}
 			}
 		}
+		
+		List<User> emp = customerRepository.findAll();
+		List<User> ll = new ArrayList<User>();
+		for(User pp : emp){
+			if(pp.getLocked()) {
+				ll.add(pp);
+//				System.out.println(pp.getEmail());
+			}
+		}
+		m.addAttribute("lock", ll);
 		m.addAttribute("list", thisadmin);
 		return "adminpage";
 	}
@@ -59,7 +79,7 @@ public class EmployeeController {
 	
 	
 	@GetMapping("/home/{id}")
-	public String admin(@PathVariable String id) {
+	public RedirectView admin(@PathVariable String id) {
 		StringBuilder qq = new StringBuilder(id);
 		Long queryuid = Long.parseLong(id.substring(7));
 		List<Query>aa = queryRepository.findAll();
@@ -73,6 +93,20 @@ public class EmployeeController {
 		}
 		thisquery.setIsOpen(false);
 		queryRepository.save(thisquery);
-		return "adminpage";
+		RedirectView rv = new RedirectView();
+		rv.setUrl("http://localhost:8080/admin/home");
+		return rv;
+	}
+	
+	@GetMapping("home/unlock/{username}")
+	public RedirectView unlock(@PathVariable String username) {
+		RedirectView rv = new RedirectView();
+		StringBuilder uuid = new StringBuilder(username)	;
+		Long uid = Long.parseLong(uuid.substring(2));
+		User u = customerRepository.findById(uid).get();
+		u.setLocked(false);
+		customerRepository.save(u);
+		rv.setUrl("http://localhost:8080/admin/home");
+		return rv;
 	}
 }

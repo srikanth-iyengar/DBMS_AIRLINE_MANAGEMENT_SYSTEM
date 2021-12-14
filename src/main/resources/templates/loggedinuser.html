@@ -54,8 +54,11 @@
           </div>
           <div>
             <button class="REG" id = "registerpage">
-                <span th:text="${user.email}"></span>
+                <span th:text="${user}"></span>
             </button>
+            <button class="REG" id = "logout">
+              <span>Logout</span>
+          </button>
           </div>
         </div>
       </div>
@@ -485,6 +488,10 @@
       $(document).ready(() => {
         $("#registerpage").click(() => {
           var url = "user/dashboard";
+          $(location).attr('href',url);
+        });
+        $("#logout").click(() =>{
+          var url = "http://localhost:8080/logout";
           $(location).attr('href',url);
         });
       });
