@@ -1,6 +1,6 @@
 # DBMSams
 Mini project DBMS 
 Team Members
-Srikanth Iyengar
-Ayush Singh
-Rahul Shukla
+Srikanth Iyengar <br/>
+Ayush Singh <br/>
+Rahul Shukla <br/>
