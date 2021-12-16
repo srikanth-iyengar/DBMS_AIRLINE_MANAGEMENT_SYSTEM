@@ -67,6 +67,7 @@ public class EmployeeController {
 //				System.out.println(pp.getEmail());
 			}
 		}
+		m.addAttribute("employee", e);
 		m.addAttribute("lock", ll);
 		m.addAttribute("list", thisadmin);
 		return "adminpage";

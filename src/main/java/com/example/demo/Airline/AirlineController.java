@@ -1,6 +1,8 @@
 package com.example.demo.Airline;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.Employee.Employee;
 import com.example.demo.Employee.EmployeeRepository;
 import com.example.demo.Flight.Flight;
 import com.example.demo.Flight.FlightService;
 import com.example.demo.User.CustomerService;
+import com.example.demo.User.FindForm;
 import com.example.demo.User.User;
 
 @Controller
@@ -24,12 +32,14 @@ public class AirlineController {
 
 	@Autowired
 	FlightService flightService;
-	
+
 	@Autowired
 	CustomerService customerService;
-	
+
 	@Autowired
 	EmployeeRepository employeeRepository;
+
+	static List<Flight> flights = new ArrayList<>();
 
 	@GetMapping("/")
 	public String home(Model m, HttpServletRequest auth) {
@@ -39,7 +49,7 @@ public class AirlineController {
 		}
 		String username = p.getName();
 		User u = customerService.currentUser(username);
-		if(u == null) {
+		if (u == null) {
 			Employee e = employeeRepository.findByUserName(username);
 			m.addAttribute("user", e.getUsername());
 			return "loggedinuser";
@@ -47,20 +57,26 @@ public class AirlineController {
 		m.addAttribute("user", u.getUsername());
 		return "loggedinuser";
 	}
-	
+
 	@GetMapping("/login")
 	public String loginpage() {
 		return "login";
 	}
 
 	@GetMapping(value = "/find")
-	public String searchFlights(@RequestParam String source, @RequestParam String destination, Model m) {
-		Iterable<Flight> flights = flightService.FindFlight(source, destination);
-		List<Flight> ff = new ArrayList<>();
-		for (Flight f : flights) {
-			ff.add(f);
+	public String searchFlights(Model m, @RequestParam String source, @RequestParam String destination) {
+		List<Flight> flights = flightService.FindFlight(source, destination);
+		List<Flight> to_be_displayed = new ArrayList<Flight>();
+		for (Flight fli : flights) {
+			if (fli.getSource().equals(source) && fli.getDestination().equals(destination)
+					&& fli.getDeparture().isAfter(LocalDateTime.now())) {
+				to_be_displayed.add(fli);
+			}
 		}
-		m.addAttribute("list", ff);
+		System.out.println(to_be_displayed);
+		m.addAttribute("list", to_be_displayed);
 		return "search";
 	}
+	
+	
 }

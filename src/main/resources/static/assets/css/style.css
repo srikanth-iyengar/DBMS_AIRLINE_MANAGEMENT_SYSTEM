@@ -11485,6 +11485,102 @@ textarea {
   padding-bottom: 5px;
 }
 
+.fb-form {
+  margin-top: 20px;
+  color: black;
+  font-family: "Poppins";
+}
+
+.fb-3 {
+  font-family: "Poppins";
+  align-items: center !important;
+  margin-left: 40px;
+}
+
+.gg {
+  color: black;
+  background-color: blueviolet !important;
+  height: 32px;
+  border-radius: 0px;
+  font-size: 12px;
+  padding: 10px;
+}
+
+.PassDet {
+  font-family: "Poppins";
+}
+
+.price {
+  margin-right: 50px;
+  background-color: blueviolet;
+  border-radius: 0px;
+}
+
+#amount {
+  background-color: blueviolet;
+}
+
+.rup {
+  background-color: blueviolet;
+  border-radius: 0px !important;
+  color: white !important;
+}
+
+.payment {
+  text-align: center !important;
+}
+
+#mode {
+  border: 1px solid white;
+  color: black;
+  background-color: blueviolet !important;
+  height: 32px;
+  border-radius: 0px;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+#addForm {
+  border-radius: 3px;
+  display: inline;
+}
+
+#bookbutton {
+  display: inline;
+}
+
+.bookbtns {
+  width: 200px;
+  margin: 0 auto;
+  display: inline;
+  text-align: center;
+}
+
+.work {
+  width: 200px;
+  margin: 0 auto;
+  display: inline;
+  text-align: center;
+}
+
+.SFB {
+  padding: 9px 0;
+  font-size: 12px;
+  border: 1px solid #cedd4d !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.SFB:hover {
+  background: #fff !important;
+  color: #000 !important;
+  transition: 0.5s;
+}
+
 .companies {
   padding: 0 0 5rem 0;
 }

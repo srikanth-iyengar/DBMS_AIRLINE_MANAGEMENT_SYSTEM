@@ -69,7 +69,7 @@
 
         <div class="input-grp phone">
           <label>Phone Number</label>
-          <input type="tel" class="form-control mt-2 mb-2" placeholder="0123456789" id="Phone">
+          <input type="tel" class="form-control mt-2 mb-2"  id="Phone">
         </div>
 
         <div class="input-grp Contact mt-2">
@@ -119,6 +119,9 @@
       }, (data, status) => {
         alert(`${data} - ${status}`)
       });
+      var goto = "http://localhost:8080";
+      // var url = "user/login";
+        $(location).attr('href', goto);
     });
   </script>
 

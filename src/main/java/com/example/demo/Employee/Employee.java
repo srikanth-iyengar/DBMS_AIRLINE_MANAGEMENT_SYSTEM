@@ -127,5 +127,9 @@ public class Employee implements UserDetails {
 		this.password = password;
 		this.gender = gender;
 	}
+	
+	public Employee(Long id) {
+		this.id = id;
+	}
 
 }

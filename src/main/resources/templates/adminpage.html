@@ -22,41 +22,50 @@
         
         </head>
 </head>
-<body style="background-color: blueviolet;">
-    
-    <table class="table table-dark table-striped table-hover">
-		<thead>
-			<tr>
-				<th scope="col">Query Id</th>
-				<th scope="col">Description</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="query : ${list}" style="cursor: pointer" th:onClick="'javascript:rowClicked(\'' + ${query.queryId} + '\');'">
-				<td th:text="${query.queryId}" />
-                <td th:text="${query.description}" />
-			</tr>
-		</tbody>
-	</table>
-    <table class="table table-dark table-striped table-hover">
-		<thead>
-			<tr>
-				<th scope="col">User Id</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">User</th>
-			</tr>
-		</thead>
-		<tbody>
-            <!-- style="cursor: pointer" th:onClick="'javascript:unlock(\'' + ${user.email} + '\');'" -->
-			<tr th:each="user : ${lock}" style="cursor: pointer;" th:onClick="'javascript:unlock(\'' + ${user.id} + '\');'">
-				<td th:text="${user.id}" />
-                <td th:text="${user.firstName}" />
-                <td th:text="${user.lastName}" />
-                <td th:text="${user.email}" />
-			</tr>
-		</tbody>
-	</table>
+<body style="background-color: black;">
+    <div style="margin-top: 30px; margin-left: 20px;">
+        <div>
+            <label class="text-white bg-dark fw-bold">First Name</label>
+            <h5 th:text="${employee.firstName}" class="text-white"></h5><br>
+            <label class="text-white bg-dark fw-bold">Last Name</label>
+            <h5 th:text="${employee.lastName}" class="text-white"></h5><br>
+            <label class="text-white bg-dark fw-bold">Salary</label>
+            <h5 th:text="${employee.salary}" class="text-white bg-dark" style="background-color: black; width: 0px;"></h5><br>
+        </div>
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Query Id</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="query : ${list}" style="cursor: pointer" th:onClick="'javascript:rowClicked(\'' + ${query.queryId} + '\');'">
+                    <td th:text="${query.queryId}" />
+                    <td th:text="${query.description}" />
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">User Id</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">User</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- style="cursor: pointer" th:onClick="'javascript:unlock(\'' + ${user.email} + '\');'" -->
+                <tr th:each="user : ${lock}" style="cursor: pointer;" th:onClick="'javascript:unlock(\'' + ${user.id} + '\');'">
+                    <td th:text="${user.id}" />
+                    <td th:text="${user.firstName}" />
+                    <td th:text="${user.lastName}" />
+                    <td th:text="${user.email}" />
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <script>
 		function rowClicked(value) {
 			location.href="http://localhost:8080/admin/home/queryId"+value;

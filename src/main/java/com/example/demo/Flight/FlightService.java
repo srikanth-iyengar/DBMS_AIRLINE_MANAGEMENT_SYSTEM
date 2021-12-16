@@ -19,8 +19,7 @@ public class FlightService {
 		return "flight registered successfully";
 	}
 
-	public Iterable<Flight> FindFlight(String source, String destination) {
-		return flightRepository.findAll().stream().filter(t -> t.getDeparture().isAfter(LocalDateTime.now())).collect(Collectors.toList());
-
+	public List<Flight> FindFlight(String source, String destination) {
+		return flightRepository.findAll();
 	}
 }

@@ -34,12 +34,17 @@ public class BookingService {
 		Booking book = new Booking();
 		
 		System.out.println(request.getUserid() + " " + request.getFlightid());
-		
+		Flight f = flightRepository.findByFlightId(request.getFlightid());
+		if(f.getCapacity() - request.getPassengers().size() < 0) {
+			return "Could Not Book Ticket";
+		}
+		f.setCapacity(f.getCapacity() - request.getPassengers().size());
+		flightRepository.save(f);
 		book.setBookingId(generatedTransactionid);
 		book.setFlight(new Flight(request.getFlightid()));
 		book.setUser(new User(request.getUserid()));
-		book.setPaymentMode(PaymentMode.DEBITCARD);
-		book.setPrice(1445.00);
+		book.setPaymentMode(request.getMode());
+		book.setPrice(request.getPrice());
 		book.setDate(LocalDateTime.now());
 		bookingRepo.save(book);
 		System.out.println(request.getUserid());

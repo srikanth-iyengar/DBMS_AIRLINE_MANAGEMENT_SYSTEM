@@ -1,132 +1,245 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <base href="/">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Search Flight Result</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/vendors/css/glightbox.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="assets/vendors/css/glightbox.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-</head>
+  </head>
 
-<body style="background-color: blueviolet">
-    <div id="form">
-        <div class="row" id="a1">
-            <div class="col-5">
-                <input type="text" name="firstName" id="firstName1" class="form-control " placeholder="First Name">
-            </div>
-            <div class="col-5">
-                <input type="text" name="lastName" id="lastName1" class="form-control" placeholder="Last Name">
-            </div>
-            <input type="number" name="age" id="age1" class="form-control" placeholder="Age" min="1">
-            <div class="col-5">
-                <select class="form-select" id="gender1">
-                    <option value="M">Male</option>
-                    <option value="F"> Femal</option>
-                </select>
-            </div>
-            <div>
-                <input type="text" name="aadharId" id="aadharId1" class="form-control" placeholder="12 digit AadharId">
-            </div>
+  <body style="background-color: blueviolet">
+    <h1 class="text-center mt-5 mb-5 PassDet">Passenger Details</h1>
+    <div
+      style="align-items: center"
+      id="form"
+      class="big-banner mt-4 container fb-3 text-center"
+    >
+      <div
+        class="row w-50 p-3 text-black text-center"
+        id="a1"
+        style="
+          height: 200px;
+          margin-top: 30px;
+          align-items: center;
+          margin-left: 320px;
+        "
+      >
+        <div style="align-items: center" class="col-5 text-center">
+          <input
+            type="text"
+            name="firstName"
+            id="firstName1"
+            class="form-control"
+            placeholder="First Name"
+          />
         </div>
-        <button type="button" id="del1" class="btn btn-primary">
-            DELETE</button>
+        <div class="col-5">
+          <input
+            type="text"
+            name="lastName"
+            id="lastName1"
+            class="form-control"
+            placeholder="Last Name"
+          />
+        </div>
+        <div class="col-3">
+          <input
+            type="number"
+            name="age"
+            id="age1"
+            class="form-control"
+            placeholder="Age"
+            min="1"
+          />
+        </div>
+        <div class="col-3">
+          <select class="form-select gg" id="gender1">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+        <div>
+          <input
+            type="text"
+            name="aadharId"
+            id="aadharId1"
+            class="form-control"
+            placeholder="12 digit AadharId"
+          />
+        </div>
+      </div>
     </div>
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">₹</span>
-        <input type="text" disabled value="100" id = "amount">
+    <div
+      class="input-group mb-3 price"
+      style="
+        margin-left: 450px;
+        width: 100px;
+        background-color: white;
+        margin-top: 40px;
+      "
+      ;
+    >
+      <span
+        class="input-group-text rup"
+        id="basic-addon1"
+        style="width: 30px; background-color: blueviolet; border: white"
+        >₹</span
+      >
+      <input
+        type="text"
+        disabled
+        value="1000"
+        id="amount"
+        style="width: 70px"
+      />
     </div>
-    <button type="button" class="btn btn-success" id="bookbutton">Book</button>
-    <button id="addForm" class="btn btn-danger" type="button">Add</button>
-</body>
-<script>
+    <div class="dropdown payment" style="margin-left: 20px">
+      <select id="mode">
+        <option value="DEBITCARD">DEBIT CARD</option>
+        <option value="CREDITCARD">CREDIT CARD</option>
+        <option value="NETBANKING">NET BANKING</option>
+        <option value="UPI">UPI</option>
+      </select>
+    </div>
+    <div
+      class="bookbtns"
+      style="
+        margin-left: 570px;
+        height: 200px;
+        width: 100px;
+        margin-bottom: 70px;
+      "
+    >
+      <div class="work">
+        <button
+          id="addForm"
+          class="btn btn-danger btn-lg btn-block SFB"
+          style="margin-bottom: 70px"
+          type="button"
+        >
+          Add
+        </button>
+        <button
+          type="button"
+          class="btn btn-success btn-lg btn-block SFB"
+          style="margin-bottom: 70px"
+          id="bookbutton"
+        >
+          Book
+        </button>
+      </div>
+    </div>
+    <br />
+    <div style="margin-left: 20px" class="d-grip gap-2"></div>
+  </body>
+  <script>
     $(document).ready(() => {
-        var count = 2
-        var active = 1;
-        $("#addForm").click(function () {
-            $("#form").append(`
-                <div class="row" id="a${count}">
-                    <div class="col-5">
+      var count = 2;
+      var active = 1;
+      $("#addForm").click(function () {
+        $("#form").append(`
+                <div class="row w-50 p-3 text-black text-center" id="a${count}" style="height: 200px; margin-left: 320px; margin-top: 30px;">
+                    <div style="align-items: center" class="col-5 text-center">
                         <input type="text" name="firstName" id="firstName${count}" class="form-control " placeholder="First Name" >
                     </div>
                     <div class="col-5">
                         <input type="text" name="lastName" id="lastName${count}" class="form-control" placeholder="Last Name">
                     </div >
+                    <div class="col-1">
+                        <button type="button" id="del${count}" class="btn btn-close" onclick="deleteBox($(this).attr('id'));"> </button>
+                    </div>
+                    <div class="col-3">
                         <input type="number" name="age" id="age${count}" class="form-control" placeholder="Age" min="1">
-                    <div class="col-5">
-                        <select class="form-select" id="gender${count}">
-                            <option value="M">Male</option> 
-                            <option value="F"> Female</option>    
-                        </select>
                     </div>
-                    <div>
-                        <input type="text" name="aadharId" id="aadharId${count}" class="form-control" placeholder="12 digit AadharId">
+                    <div class="col-3">
+                        <select class="form-select gg" id="gender${count}">
+                                <option value="M">Male</option> 
+                                <option value="F"> Female</option>    
+                                </select>
                     </div>
-                    <button type="button" id="del${count}" class="btn btn-primary" onclick="deleteBox($(this).attr('id'));"> DELETE</button>
-                </div>`
-            )
-            active++;
-            $("#amount").val(active*100)
-            count++
-        });
-        deleteBox = (id) => {
-            var id_len = id.length;
-            var form_id = "a";
-            for (var i = 3; i < id_len; i++) {
-                form_id += id[i];
-            }
-            active--;
-            $("#amount").val(active*100)
-            $("#" + form_id).remove();
-        };
-        $("#bookbutton").click(function (event) {
-            event.preventDefault();
-            alert("Submitting the form");
-            var passengers = [{
-
-            }];
-            for (var i = 1; i <= count; i++) {
-                if ($(`#a${i}`).length) {
-                    var passenger = {
-
-                    };
-                    passenger["firstName"] = $(`#firstName${i}`).val();
-                    passenger["lastName"] = $(`#lastName${i}`).val();
-                    passenger["age"] = $(`#age${i}`).val();
-                    passenger["gender"] = $(`#gender${i}`).find(":selected").val();
-                    passenger["aadhar"] = $(`#aadharId${i}`).val();
-                    passengers.push(passenger);
-                }
-            }
-            console.log(passengers);
-            
-            var pathname = window.location.pathname;
-            var result = null;
-            $.ajax({
-                method: "post",
-                url: pathname,
-                data: JSON.stringify(passengers),
-                datatype: 'json',
-                contentType: "application/json",
-                success: (data) => {
-                    result = data;        
-                    var url = "http://localhost:8080/user/success/" + result;
-                    $(location).attr('href',url);
-                }
-            }, (data, status) => {
-                alert(`${data} - ${status}`)
-            });
-        });
+                    <div class="col-12">
+                            <input type="text" name="aadharId" id="aadharId${count}" class="form-control" placeholder="12 digit AadharId">
+                    </div>          
+                </div>`);
+        active++;
+        $("#amount").val(active * 1000);
+        count++;
+      });
+      deleteBox = (id) => {
+        var id_len = id.length;
+        var form_id = "a";
+        for (var i = 3; i < id_len; i++) {
+          form_id += id[i];
+        }
+        active--;
+        $("#amount").val(active * 1000);
+        $("#" + form_id).remove();
+      };
+      $("#bookbutton").click(function (event) {
+        event.preventDefault();
+        alert("Submitting the form");
+        var passengers = [{}];
+        for (var i = 1; i <= count; i++) {
+          if ($(`#a${i}`).length) {
+            var passenger = {};
+            passenger["firstName"] = $(`#firstName${i}`).val();
+            passenger["lastName"] = $(`#lastName${i}`).val();
+            passenger["age"] = $(`#age${i}`).val();
+            passenger["gender"] = $(`#gender${i}`).find(":selected").val();
+            passenger["aadhar"] = $(`#aadharId${i}`).val();
+            passengers.push(passenger);
+          }
+        }
+        var amount = $(`#amount`).val();
+        var paymentmode = $(`#mode`).val();
+        var pathname = window.location.pathname;
+        var result = null;
+        console.log(
+          JSON.stringify({
+            passengers: passengers,
+            price: amount,
+            paymentmode: paymentmode,
+          })
+        );
+        $.ajax(
+          {
+            method: "post",
+            url: pathname,
+            data: JSON.stringify({
+              passengers: passengers,
+              price: amount,
+              paymentmode: paymentmode,
+            }),
+            datatype: "json",
+            contentType: "application/json",
+            success: (data) => {
+              result = data;
+              var url = "http://localhost:8080/user/success/" + result;
+              $(location).attr("href", url);
+            },
+          },
+          (data, status) => {
+            alert(`${data} - ${status}`);
+          }
+        );
+      });
     });
-</script>
-
+  </script>
 </html>

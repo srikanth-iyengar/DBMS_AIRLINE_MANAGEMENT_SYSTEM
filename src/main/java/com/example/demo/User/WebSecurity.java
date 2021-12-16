@@ -30,7 +30,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		.antMatchers("/user/register").permitAll()
 		.and().authorizeRequests().antMatchers("/user/book/**").hasAnyAuthority("USER", "ADMIN")
 		.and().authorizeRequests().antMatchers("/admin/home").hasAnyAuthority("ADMIN")	
-		.and().formLogin().permitAll()
+		.and().formLogin().loginPage("/login").permitAll()
 		.and().logout().clearAuthentication(true).logoutSuccessUrl("/").deleteCookies("JSESSIONID").invalidateHttpSession(true)
 		.and().csrf().disable();
 	}
