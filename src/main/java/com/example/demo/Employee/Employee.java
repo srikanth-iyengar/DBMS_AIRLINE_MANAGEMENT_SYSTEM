@@ -103,9 +103,25 @@ public class Employee implements UserDetails {
 		return true;
 	}
 
+	public Set<Query> getQueries() {
+		return queries;
+	}
+
+	public void setQueries(Set<Query> queries) {
+		this.queries = queries;
+	}
+
 	@Override
 	public boolean isEnabled() {
 		return enabled;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Employee(

@@ -64,7 +64,6 @@ public class EmployeeController {
 		for(User pp : emp){
 			if(pp.getLocked()) {
 				ll.add(pp);
-//				System.out.println(pp.getEmail());
 			}
 		}
 		m.addAttribute("employee", e);

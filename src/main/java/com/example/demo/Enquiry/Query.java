@@ -11,12 +11,6 @@ import javax.persistence.ManyToOne;
 import com.example.demo.Employee.Employee;
 import com.example.demo.User.User;
 
-import lombok.Getter;
-import lombok.Setter;
-
-
-@Getter
-@Setter
 @Entity
 public class Query {
 	
@@ -39,4 +33,55 @@ public class Query {
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
+
+
+	public Long getQueryId() {
+		return queryId;
+	}
+
+
+	public void setQueryId(Long queryId) {
+		this.queryId = queryId;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public Boolean getIsOpen() {
+		return isOpen;
+	}
+
+
+	public void setIsOpen(Boolean isOpen) {
+		this.isOpen = isOpen;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+	
 }

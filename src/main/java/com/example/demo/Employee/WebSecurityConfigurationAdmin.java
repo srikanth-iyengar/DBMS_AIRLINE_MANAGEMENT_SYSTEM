@@ -16,12 +16,17 @@ import lombok.AllArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
+//@AllArgsConstructor
 @Order(1000)
 public class WebSecurityConfigurationAdmin extends WebSecurityConfigurerAdapter{
 	
 	private final EmployeeService employeeService;
 	
+	public WebSecurityConfigurationAdmin(EmployeeService employeeService) {
+		super();
+		this.employeeService = employeeService;
+	}
+
 	@Bean
 	public BCryptPasswordEncoder getsCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();

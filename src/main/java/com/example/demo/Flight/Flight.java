@@ -15,16 +15,8 @@ import javax.persistence.OneToMany;
 import com.example.demo.Airline.Airline;
 import com.example.demo.Booking.Booking;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Flight {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -70,5 +62,85 @@ public class Flight {
 	public Flight(Long id) {
 		this.flightId = id;
 	}
+
+	public Long getFlightId() {
+		return flightId;
+	}
+
+	public void setFlightId(Long flightId) {
+		this.flightId = flightId;
+	}
+
+	public LocalDateTime getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(LocalDateTime arrival) {
+		this.arrival = arrival;
+	}
+
+	public LocalDateTime getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(LocalDateTime departure) {
+		this.departure = departure;
+	}
+
+	public Integer getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	public Airline getAirline() {
+		return airline;
+	}
+
+	public void setAirline(Airline airline) {
+		this.airline = airline;
+	}
+
+	public Set<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(Set<Booking> bookings) {
+		this.bookings = bookings;
+	}
 	
+	public Flight() {
+		
+	}
+
+	public Flight(Long flightId, LocalDateTime arrival, LocalDateTime departure, Integer capacity, String source,
+			String destination, Airline airline, Set<Booking> bookings) {
+		super();
+		this.flightId = flightId;
+		this.arrival = arrival;
+		this.departure = departure;
+		this.capacity = capacity;
+		this.source = source;
+		this.destination = destination;
+		this.airline = airline;
+		this.bookings = bookings;
+	}
 }

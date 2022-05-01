@@ -22,13 +22,13 @@ import com.example.demo.Flight.Flight;
 import com.example.demo.User.User;
 import com.example.demo.User.Passenger.Passenger;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+//import lombok.Getter;
+//import lombok.NoArgsConstructor;
+//import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
+//@Getter
+//@Setter
+//@NoArgsConstructor
 @Entity
 @Table(name = "ticket")
 public class Booking {
@@ -57,8 +57,21 @@ public class Booking {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	
-	
+	public Booking() {
+		
+	}
+	public Booking(String bookingId, PaymentMode paymentMode, Double price, LocalDateTime date, Flight flight,
+			User user, Set<Passenger> passengers) {
+		super();
+		BookingId = bookingId;
+		this.paymentMode = paymentMode;
+		this.price = price;
+		this.date = date;
+		this.flight = flight;
+		this.user = user;
+		this.passengers = passengers;
+	}
+
 	@OneToMany(mappedBy = "booking")
 	private Set<Passenger> passengers;
 	
@@ -68,4 +81,62 @@ public class Booking {
 		this.paymentMode = PaymentMode.CREDITCARD;
 		this.price = 1200.00;
 	}
+
+	public String getBookingId() {
+		return BookingId;
+	}
+
+	public void setBookingId(String bookingId) {
+		BookingId = bookingId;
+	}
+
+	public PaymentMode getPaymentMode() {
+		return paymentMode;
+	}
+
+	public void setPaymentMode(PaymentMode paymentMode) {
+		this.paymentMode = paymentMode;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Set<Passenger> getPassengers() {
+		return passengers;
+	}
+
+	public void setPassengers(Set<Passenger> passengers) {
+		this.passengers = passengers;
+	}
+	
+	
 }

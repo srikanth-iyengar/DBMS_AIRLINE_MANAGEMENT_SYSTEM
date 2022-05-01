@@ -35,13 +35,13 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private Long id;
-	
+
 	@Column(name = "phone_no", nullable = false, length = 10)
 	private String phoneNo;
-	
+
 	@Column(name = "gender", nullable = false, length = 1)
 	private Character gender;
-	
+
 	@Column(name = "firstName", nullable = false, length = 20)
 	private String firstName;
 
@@ -59,13 +59,13 @@ public class User implements UserDetails {
 
 	@Column(name = "isenabled", nullable = false)
 	private Boolean enabled = true;
-	
+
 	@OneToMany(mappedBy = "user")
 	private Set<Booking> bookings;
-	
+
 	@OneToMany(mappedBy = "user")
 	private Set<Query> enquiry;
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
@@ -78,6 +78,14 @@ public class User implements UserDetails {
 		return password;
 	}
 
+	public Boolean getLocked() {
+		return locked;
+	}
+
+	public void setLocked(Boolean locked) {
+		this.locked = locked;
+	}
+
 	@Override
 	public String getUsername() {
 		return email;
@@ -87,8 +95,16 @@ public class User implements UserDetails {
 	public boolean isAccountNonExpired() {
 		return true;
 	}
-	
+
 	public User(Long id) {
+		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -115,14 +131,7 @@ public class User implements UserDetails {
 		return enabled;
 	}
 
-	public User(
-			String firstName, 
-			String lastName, 
-			String email, 
-			String password,
-			Character gender,
-			String phoneno
-			) {
+	public User(String firstName, String lastName, String email, String password, Character gender, String phoneno) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -130,5 +139,9 @@ public class User implements UserDetails {
 		this.password = password;
 		this.gender = gender;
 		this.phoneNo = phoneno;
+	}
+	
+	public User() {
+		
 	}
 }

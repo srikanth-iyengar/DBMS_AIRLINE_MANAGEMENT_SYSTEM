@@ -44,22 +44,22 @@ public class CustomerController {
 
 	@Autowired
 	FlightService flightService;
-	
+
 	@Autowired
 	BookingService bookingService;
-	
+
 	@Autowired
 	BookingRepository bookingRepository;
-	
+
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
+
 	@Autowired
 	QueryRepository queryRepository;
-	
+
 	@Autowired
 	PassengerRepository passengerRepository;
-	
+
 	@Autowired
 	FlightRepository flightRepository;
 
@@ -67,16 +67,17 @@ public class CustomerController {
 	public @ResponseBody String Register(@RequestBody RegistrationRequest request) {
 		return customerService.register(request);
 	}
-	
+
 	@GetMapping(path = "/register")
 	public String Register() {
 		return "RegisterUser";
 	}
+
 	@GetMapping(path = "/accessDenied")
 	public String accessDenied() {
 		return "accessdenied";
 	}
-	
+
 	@GetMapping(path = "/login")
 	public String login() {
 		return "login";
@@ -86,21 +87,21 @@ public class CustomerController {
 	@ResponseBody
 	public String currentUserName(HttpServletRequest auth) {
 		Principal principal = auth.getUserPrincipal();
-		if(principal == null) {
+		if (principal == null) {
 			return "<h1>Please login<h1>";
 		}
-		return "<h1>"+principal.getName()+"<h1>";
+		return "<h1>" + principal.getName() + "<h1>";
 	}
 
-	
 	@GetMapping(value = "/book/{id}")
-	public String bookFlight(Model M,@PathVariable String id) {
+	public String bookFlight(Model M, @PathVariable String id) {
 		return "FlightBooking";
 	}
-	
-	@PostMapping(value="book/{id}")
+
+	@PostMapping(value = "book/{id}")
 	@ResponseBody
-	public String confirmBooking(@PathVariable String id,@RequestBody BookingForm bo, HttpServletRequest auth, Model m) {
+	public String confirmBooking(@PathVariable String id, @RequestBody BookingForm bo, HttpServletRequest auth,
+			Model m) {
 		StringBuilder flight_id = new StringBuilder(id);
 		System.out.println(bo.passengers + " " + bo.paymentmode + " " + bo.price);
 		bo.passengers.remove(0);
@@ -109,38 +110,35 @@ public class CustomerController {
 		String userEmail = UserName.getName();
 		Long customer_id = customerService.userId(userEmail);
 		PaymentMode mode;
-		if(bo.paymentmode.equals("DEBITCARD")) {
+		if (bo.paymentmode.equals("DEBITCARD")) {
 			mode = PaymentMode.DEBITCARD;
-		}
-		else if(bo.paymentmode.equals("CREDITCARD")) {
+		} else if (bo.paymentmode.equals("CREDITCARD")) {
 			mode = PaymentMode.CREDITCARD;
-		}
-		else if(bo.paymentmode.equals("NETBANKING")){
+		} else if (bo.paymentmode.equals("NETBANKING")) {
 			mode = PaymentMode.NETBANKING;
-		}
-		else {
+		} else {
 			mode = PaymentMode.UPI;
 		}
 		BookingRequest request = new BookingRequest(uid, customer_id, bo.passengers, mode, bo.price);
 		return bookingService.bookTicket(request);
 	}
-	
+
 	@PostMapping(value = "/query")
-	public RedirectView askQuery(@RequestBody String query,HttpServletRequest auth) {
+	public RedirectView askQuery(@RequestBody String query, HttpServletRequest auth) {
 		RedirectView rv = new RedirectView();
 		rv.setUrl("http://localhost:8080/user/dashboard");
-		List<Employee>emp = employeeRepository.findAll();
-		Comparator<Employee>com = (e1, e2) -> e1.getQueries().size() > e2.getQueries().size() ? 1 : -1;
+		List<Employee> emp = employeeRepository.findAll();
+		Comparator<Employee> com = (e1, e2) -> e1.getQueries().size() > e2.getQueries().size() ? 1 : -1;
 		Collections.sort(emp, com);
 		StringBuilder sb = new StringBuilder(query);
 		String actual_query = sb.substring(10, sb.length() - 2);
 		Employee emp_with_minimum_query = null;
 		int min_query = Integer.MAX_VALUE;
-		for(Employee e : emp) {
+		for (Employee e : emp) {
 			min_query = Math.min(min_query, e.getQueries().size());
 		}
-		for(Employee e : emp) {
-			if(e.getQueries().size() == min_query) {
+		for (Employee e : emp) {
+			if (e.getQueries().size() == min_query) {
 				emp_with_minimum_query = e;
 				break;
 			}
@@ -158,19 +156,17 @@ public class CustomerController {
 		queryRepository.save(new_query);
 		return rv;
 	}
-	
-	
+
 	@GetMapping(value = "/dashboard")
 	public String dashboard(Model m, HttpServletRequest auth) {
 		Principal UserName = auth.getUserPrincipal();
 		String userEmail = UserName.getName();
-		
+
 		User cur = customerService.currentUser(userEmail);
-		List<Booking>bookings = bookingService.bookingRepo.findAll();
+		List<Booking> bookings = bookingService.bookingRepo.findAll();
 		List<Booking> thisuser = new ArrayList<>();
-		for(Booking b : bookings) {
-			if(b.getUser().getUsername().equals(cur.getEmail()))
-			{
+		for (Booking b : bookings) {
+			if (b.getUser().getUsername().equals(cur.getUsername())) {
 				thisuser.add(b);
 			}
 		}
@@ -178,22 +174,21 @@ public class CustomerController {
 		m.addAttribute("list", thisuser);
 		return "dashboarduser";
 	}
-	
-	
+
 	@GetMapping(value = "/success/{token}")
 	public String sucess(@PathVariable String token, Model m) {
 		m.addAttribute("token", token);
 		return "success";
 	}
-	
+
 	@GetMapping(value = "cancel/{id}")
 	public String searchFlights(@PathVariable String id, Model m) {
 		System.out.println(id);
-		List<Passenger>pass = passengerRepository.findAll();
+		List<Passenger> pass = passengerRepository.findAll();
 		Booking book = bookingRepository.findById(id).get();
 		Flight flight = flightRepository.findById(book.getFlight().getFlightId()).get();
-		for(Passenger p : pass) {
-			if(p.getBooking().getBookingId().equals(id)) {
+		for (Passenger p : pass) {
+			if (p.getBooking().getBookingId().equals(id)) {
 				passengerRepository.delete(p);
 				flight.setCapacity(flight.getCapacity() + 1);
 			}
@@ -202,14 +197,13 @@ public class CustomerController {
 		bookingRepository.delete(book);
 		return "cancel";
 	}
-	
+
 	@GetMapping(value = "dashboard/show/{id}")
 	public String getPass(@PathVariable String id, Model m) {
 		List<Passenger> pass = passengerRepository.findAll();
 		List<Passenger> to_be_returned = new ArrayList<>();
-		for(Passenger p : pass)
-		{
-			if(p.getBooking().getBookingId().equals(id)) {
+		for (Passenger p : pass) {
+			if (p.getBooking().getBookingId().equals(id)) {
 				to_be_returned.add(p);
 			}
 		}
