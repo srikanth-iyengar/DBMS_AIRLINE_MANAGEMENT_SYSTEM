@@ -1,1 +1,1 @@
-web: mvn spring-boot:run
+web: jar -jar target\AirlineManagementSys-0.0.2-SNAPSHOT.jar
