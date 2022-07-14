@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,117 +30,113 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity(name = "app_user")
 public class User implements UserDetails {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
+    private Long id;
 
-	@Column(name = "phone_no", nullable = false, length = 10)
-	private String phoneNo;
+    @Column(name = "phone_no", nullable = false, length = 10)
+    private String phoneNo;
 
-	@Column(name = "gender", nullable = false, length = 1)
-	private Character gender;
+    @Column(name = "gender", nullable = false, length = 1)
+    private Character gender;
 
-	@Column(name = "firstName", nullable = false, length = 20)
-	private String firstName;
+    @Column(name = "firstName", nullable = false, length = 20)
+    private String firstName;
 
-	@Column(name = "lastName", nullable = false, length = 20)
-	private String lastName;
+    @Column(name = "lastName", nullable = false, length = 20)
+    private String lastName;
 
-	@Column(name = "email", nullable = false)
-	private String email;
+    @Column(name = "email", nullable = false)
+    private String email;
 
-	@Column(name = "password", nullable = false)
-	private String password;
+    @Column(name = "password", nullable = false)
+    private String password;
 
-	@Column(name = "islocked", nullable = false)
-	private Boolean locked = false;
+    @Column(name = "islocked", nullable = false)
+    private Boolean locked = false;
 
-	@Column(name = "isenabled", nullable = false)
-	private Boolean enabled = true;
+    @Column(name = "isenabled", nullable = false)
+    private Boolean enabled = true;
 
-	@OneToMany(mappedBy = "user")
-	private Set<Booking> bookings;
+    @OneToMany(mappedBy = "user")
+    private Set<Booking> bookings;
 
-	@OneToMany(mappedBy = "user")
-	private Set<Query> enquiry;
+    @OneToMany(mappedBy = "user")
+    private Set<Query> enquiry;
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority("USER"));
-		return authorities;
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+	List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+	authorities.add(new SimpleGrantedAuthority("USER"));
+	return authorities;
+    }
 
-	@Override
-	public String getPassword() {
-		return password;
-	}
+    @Override
+    public String getPassword() {
+	return password;
+    }
 
-	public Boolean getLocked() {
-		return locked;
-	}
+    public Boolean getLocked() {
+	return locked;
+    }
 
-	public void setLocked(Boolean locked) {
-		this.locked = locked;
-	}
+    public void setLocked(Boolean locked) {
+	this.locked = locked;
+    }
 
-	@Override
-	public String getUsername() {
-		return email;
-	}
+    @Override
+    public String getUsername() {
+	return email;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
+    @Override
+    public boolean isAccountNonExpired() {
+	return true;
+    }
 
-	public User(Long id) {
-		this.id = id;
-	}
+    public User(Long id) {
+	this.id = id;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getFirstName() {
+	return firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getLastName() {
+	return lastName;
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return !locked;
-	}
+    @Override
+    public boolean isAccountNonLocked() {
+	return !locked;
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+    @Override
+    public boolean isCredentialsNonExpired() {
+	return true;
+    }
 
-	@Override
-	public boolean isEnabled() {
-		return enabled;
-	}
+    @Override
+    public boolean isEnabled() {
+	return enabled;
+    }
 
-	public User(String firstName, String lastName, String email, String password, Character gender, String phoneno) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.gender = gender;
-		this.phoneNo = phoneno;
-	}
-	
-	public User() {
-		
-	}
+    public User(String firstName, String lastName, String email, String password, Character gender, String phoneno) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.email = email;
+	this.password = password;
+	this.gender = gender;
+	this.phoneNo = phoneno;
+    }
 }
