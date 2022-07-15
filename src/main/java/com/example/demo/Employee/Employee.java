@@ -20,16 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.Enquiry.Query;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
+@Entity(name = "employee")
 public class Employee implements UserDetails {
 
 	@Id
