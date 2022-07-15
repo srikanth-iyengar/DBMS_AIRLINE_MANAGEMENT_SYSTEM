@@ -540,7 +540,7 @@
         var destination = $(`#destination`).val();
         var arrival = $(`#arrival`).val();
         var departure = $(`#departure`).val();
-        var pathname = `http://localhost:8080/find?source=${source}&destination=${destination}`
+        var pathname = `find?source=${source}&destination=${destination}`
         $(location).attr('href', pathname);
       })
     });

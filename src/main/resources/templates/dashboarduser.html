@@ -95,7 +95,7 @@
             $(`#query`).click(() => {
                 var dp = $(`#description`).val();
 
-                var pathname = "http://localhost:8080/user/query";
+                var pathname = "/user/query";
 
                 $.ajax({
                     method: "post",
@@ -115,14 +115,14 @@
             });
             $(`#cancel`).click(() => {
                 var id = $(`#bookingid`).val();
-                var url = "http://localhost:8080/user/cancel/" + id;
+                var url = "/user/cancel/" + id;
                 $(location).attr('href', url);
                 alert("Please Confirm that you want to cancel this ticket")
             });
 
             $(`#show`).click(() => {
                 var id = $(`#showid`).val();
-                var url = "http://localhost:8080/user/dashboard/show/" + id;
+                var url = "/user/dashboard/show/" + id;
                 $(location).attr('href', url);
             });
         });
