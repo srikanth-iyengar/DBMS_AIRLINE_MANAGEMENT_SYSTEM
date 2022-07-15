@@ -67,15 +67,15 @@
     </div>
     <script>
 		function rowClicked(value) {
-			location.href="/admin/home/queryId"+value;
+			location.href="http://localhost:8080/admin/home/queryId"+value;
 		}
 
         function unlock(value) {
-			location.href="/admin/home/unlock/id"+value;
+			location.href="http://localhost:8080/admin/home/unlock/id"+value;
 		}
 
         $("#home").click(() => {
-            location.href="/admin/home";
+            location.href="http://localhost:8080/admin/home";
         });
 	</script>
 </body>
