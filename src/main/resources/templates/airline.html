@@ -251,9 +251,9 @@
 
     <!-- START THE CONTENT FOR THE SERVICES -->
     <div class="container">
-      <div class="container ">
+      <div class="container d-flex justify-content-center">
         <div class="row">
-          <div class="d-flex justify-content-center">
+          <div class="col-md-6 col-lg-4 shadow-sm board">
             <div class="companies__logo-box hover-shadow mask"><img src="images/board/s.jfif"
                 class="rounded-circle img-fluid" alt="Player 1 logo" title="Srikanth Iyengar"></div>
             <div class="caption text-center fw-bold">Srikanth Iyengar</div>
@@ -540,7 +540,7 @@
         var destination = $(`#destination`).val();
         var arrival = $(`#arrival`).val();
         var departure = $(`#departure`).val();
-        var pathname = `http://localhost:8080/find?source=${source}&destination=${destination}`
+        var pathname = `find?source=${source}&destination=${destination}`
         $(location).attr('href', pathname);
       })
     });
